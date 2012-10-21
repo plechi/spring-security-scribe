@@ -133,13 +133,13 @@ You can easy use every OAuth-Provider scribe supports ([full list here](https://
 TODO list
 ---------
 
-There are still many things to do.
+There are still many things to do
 
  1. better documentation (especially javadoc)
  2. more implementations of configurations
 
-I actually have very small resources to maintain the project, but i'm very omtimistic to work on it from time to time.
-There is also s productive enviroment which uses this library, so critical issues will be fixed very fast.
+I actually have very small resources left to maintain the project, but i'm very omtimistic to work on it from time to time.
+There is also a productive enviroment which uses this library, so critical issues will be fixed very fast.
 
 About Me
 --------
