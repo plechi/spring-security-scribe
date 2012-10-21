@@ -76,7 +76,7 @@ Spring application context configuration:
 
 Now you can login with Facebook by calling `/login` in your browser.
 
-That's it. If the user successfully authenticated with Facebook, you can get his credentials by retrieving the `Authentication` object from the `SecurityContext`.
+That's it. If the authentication was successful, you can get the user's credentials by retrieving the `Authentication` object from the `SecurityContext`.
 
 ```java
 Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -145,6 +145,7 @@ About Me
 --------
 
 Email me: lukasplechinger at gmail.com
+
 Follow me at Twitter: [@plechinger](https://www.twitter.com/plechinger)
 
 
