@@ -39,7 +39,7 @@ Spring application context configuration:
 </authentication-manager>
     
 <bean id="authenticaionEntryPoint" 
-        class="at.plechinger.spring.security.web.authentication.LoginUrlAuthenticationEntryPoint">
+        class="org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint">
     <property name="loginFormUrl" value="index.jsp" />
 </bean>
     
@@ -52,13 +52,13 @@ Spring application context configuration:
         class="org.springframework.security.scribe.ScribeAuthenticationFilter">
     <property name="authenticationManager" ref="authenticationManager" />
     <property name="authenticationSuccessHandler">
-        <bean class="at.plechinger.spring.security.web.authentication.SimpleUrlAuthenticationSuccessHandler">
+        <bean class="org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler">
             <property name="defaultTargetUrl" value="protected.jsp" />
             <property name="alwaysUseDefaultTargetUrl" value="true" />
         </bean>
     </property>
     <property name="authenticationFailureHandler">
-        <bean class="at.plechinger.spring.security.web.authentication.SimpleUrlAuthenticationFailureHandler">
+        <bean class="org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler">
             <property name="defaultFailureUrl" value="error.jsp" />
         </bean>
     </property>
