@@ -85,7 +85,7 @@ Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 The Authentication-Object is from type `ScribeAuthentication`. 
 The username you retrieve would be `oauth_facebook_<facebook uid>`.
 
-Using other OAuth Providers
+Using other OAuth - Provider
 ---------------------------
 
 ###Facebook and Twitter###
