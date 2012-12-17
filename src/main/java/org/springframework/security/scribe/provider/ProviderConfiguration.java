@@ -24,6 +24,7 @@
 package org.springframework.security.scribe.provider;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import org.json.JSONException;
@@ -33,7 +34,7 @@ import org.springframework.security.scribe.ScribeUserNotConnectedException;
 
 /**
  *
- * @author Lukas
+ * @author Lukas Plechinger, www.plechinger.at
  */
 public interface ProviderConfiguration extends Serializable {
 
@@ -56,4 +57,6 @@ public interface ProviderConfiguration extends Serializable {
     String getApiSecret();
 
     String getFilterIdentifer();
+
+    public List<String> getAuthorities();
 }

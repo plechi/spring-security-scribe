@@ -32,8 +32,10 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.scribe.provider.ProviderConfiguration;
 
 /**
+ * The implementation of
+ * <code>AuthenticationToken</code> for ScribeAuthentication.
  *
- * @author Lukas
+ * @author Lukas Plechinger, www.plechinger.at
  */
 public class ScribeAuthentication extends AbstractAuthenticationToken {
 

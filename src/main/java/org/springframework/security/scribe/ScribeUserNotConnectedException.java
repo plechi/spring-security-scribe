@@ -28,7 +28,7 @@ import org.springframework.security.scribe.provider.ProviderConfiguration;
 
 /**
  *
- * @author Lukas
+ * @author Lukas Plechinger, www.plechinger.at
  */
 public class ScribeUserNotConnectedException extends AuthenticationException {
 

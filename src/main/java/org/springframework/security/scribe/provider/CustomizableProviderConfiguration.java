@@ -23,11 +23,12 @@
  */
 package org.springframework.security.scribe.provider;
 
+import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 /**
  *
- * @author Lukas
+ * @author Lukas Plechinger, www.plechinger.at
  */
 public class CustomizableProviderConfiguration extends AbstractProviderConfiguration {
 
@@ -36,6 +37,7 @@ public class CustomizableProviderConfiguration extends AbstractProviderConfigura
     private String userDetailsUrl;
     private String userIdToken;
     private String filterIdentifer;
+    private List<String> authorities;
 
     public String getAuthCode(HttpServletRequest request) {
         return request.getParameter(verifyParameter);
@@ -80,5 +82,13 @@ public class CustomizableProviderConfiguration extends AbstractProviderConfigura
 
     public void setFilterIdentifer(String filterIdentifer) {
         this.filterIdentifer = filterIdentifer;
+    }
+
+    public List<String> getAuthorities() {
+        return authorities;
+    }
+
+    public void setAuthorities(List<String> authorities) {
+        this.authorities = authorities;
     }
 }

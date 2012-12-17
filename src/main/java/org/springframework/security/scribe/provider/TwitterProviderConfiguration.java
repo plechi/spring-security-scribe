@@ -23,9 +23,14 @@
  */
 package org.springframework.security.scribe.provider;
 
+import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import org.scribe.builder.api.TwitterApi;
 
+/**
+ *
+ * @author Lukas Plechinger, www.plechinger.at
+ */
 public class TwitterProviderConfiguration extends AbstractProviderConfiguration {
 
     private static final String PARAMETER_CODE = "oauth_verifier";
@@ -53,5 +58,9 @@ public class TwitterProviderConfiguration extends AbstractProviderConfiguration 
 
     public String getFilterIdentifer() {
         return FILTER_IDENTIFER;
+    }
+
+    public List<String> getAuthorities() {
+        return null;
     }
 }

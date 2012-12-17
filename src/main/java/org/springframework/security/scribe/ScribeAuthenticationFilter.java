@@ -29,6 +29,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import org.apache.log4j.Level;
+import org.apache.log4j.Logger;
 import org.scribe.builder.ServiceBuilder;
 import org.scribe.model.Token;
 import org.scribe.model.Verifier;
@@ -41,12 +43,18 @@ import org.springframework.security.web.authentication.AbstractAuthenticationPro
 
 /**
  *
- * @author Lukas
+ * @author Lukas Plechinger, www.plechinger.at
  */
 public class ScribeAuthenticationFilter extends AbstractAuthenticationProcessingFilter {
 
+    private static final Logger LOG = Logger.getLogger(ScribeAuthenticationFilter.class);
+    //default values
     public static final String DEFAULT_FILTER_PROCESS_URL = "/j_spring_security_scribe/**";
     private static final String SESSION_TOKEN = "spring.security.scribe.token";
+    /**
+     * List of
+     * <code>SocialAuthenticationProvider</code>s
+     */
     private List<ProviderConfiguration> providerConfigurations;
     private String configMatchParameter = "method";
 
@@ -56,28 +64,30 @@ public class ScribeAuthenticationFilter extends AbstractAuthenticationProcessing
 
     @Override
     public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException, IOException, ServletException {
-
-
-
-        String callbackUrl = request.getRequestURL().append("?").append(
-                request.getQueryString()).toString();
-        System.out.println("callbackUrl " + callbackUrl);
+        String callbackUrl = request.getRequestURL().append("?").append(request.getQueryString()).toString();
+        LOG.debug("callbackUrl " + callbackUrl);
 
         String configMatch = request.getParameter(configMatchParameter);
 
-        System.out.println("configMatch: " + configMatch);
+        LOG.debug("configMatch: " + configMatch);
 
         ProviderConfiguration providerConfiguration = getMatchedProviderConfiguration(configMatch);
 
         HttpSession session = request.getSession(true);
 
-        OAuthService oAuthService = new ServiceBuilder()
+        ServiceBuilder serviceBuilder = new ServiceBuilder()
                 .provider(providerConfiguration.getApiClass())
                 .apiKey(providerConfiguration.getApiKey())
                 .apiSecret(providerConfiguration.getApiSecret())
-                .callback(callbackUrl)
-                .debug()
-                .build();
+                .callback(callbackUrl);
+
+        //enable debug logging if enabled
+        if (LOG.getLevel() == Level.DEBUG) {
+            LOG.debug("enable scribe debug mode");
+            serviceBuilder.debug();
+        }
+
+        OAuthService oAuthService = serviceBuilder.build();
 
         if (!providerConfiguration.isAuthCodeProvided(request)) {
             Token requestToken = null;

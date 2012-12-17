@@ -37,7 +37,7 @@ import org.springframework.security.scribe.ScribeUserNotConnectedException;
 
 /**
  *
- * @author Lukas
+ * @author Lukas Plechinger, www.plechinger.at
  */
 public abstract class AbstractProviderConfiguration implements ProviderConfiguration {
 

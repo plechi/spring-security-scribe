@@ -23,9 +23,14 @@
  */
 package org.springframework.security.scribe.provider;
 
+import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import org.scribe.builder.api.FacebookApi;
 
+/**
+ *
+ * @author Lukas Plechinger, www.plechinger.at
+ */
 public class FacebookProviderConfiguration extends AbstractProviderConfiguration {
 
     private static final String PARAMETER_CODE = "code";
@@ -53,5 +58,9 @@ public class FacebookProviderConfiguration extends AbstractProviderConfiguration
 
     public String getFilterIdentifer() {
         return FILTER_IDENTIFER;
+    }
+
+    public List<String> getAuthorities() {
+        return null;
     }
 }

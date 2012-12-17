@@ -39,7 +39,7 @@ Spring application context configuration:
 </authentication-manager>
     
 <bean id="authenticaionEntryPoint" 
-        class="org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint">
+        class="at.plechinger.spring.security.web.authentication.LoginUrlAuthenticationEntryPoint">
     <property name="loginFormUrl" value="index.jsp" />
 </bean>
     
@@ -52,13 +52,13 @@ Spring application context configuration:
         class="org.springframework.security.scribe.ScribeAuthenticationFilter">
     <property name="authenticationManager" ref="authenticationManager" />
     <property name="authenticationSuccessHandler">
-        <bean class="org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler">
+        <bean class="at.plechinger.spring.security.web.authentication.SimpleUrlAuthenticationSuccessHandler">
             <property name="defaultTargetUrl" value="protected.jsp" />
             <property name="alwaysUseDefaultTargetUrl" value="true" />
         </bean>
     </property>
     <property name="authenticationFailureHandler">
-        <bean class="org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler">
+        <bean class="at.plechinger.spring.security.web.authentication.SimpleUrlAuthenticationFailureHandler">
             <property name="defaultFailureUrl" value="error.jsp" />
         </bean>
     </property>
@@ -76,7 +76,7 @@ Spring application context configuration:
 
 Now you can login with Facebook by calling `/login` in your browser.
 
-That's it. If the authentication was successful, you can get the user's credentials by retrieving the `Authentication` object from the `SecurityContext`.
+That's it. If the user successfully authenticated with Facebook, you can get his credentials by retrieving the `Authentication` object from the `SecurityContext`.
 
 ```java
 Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -133,13 +133,13 @@ You can easy use every OAuth-Provider scribe supports ([full list here](https://
 TODO list
 ---------
 
-There are still many things to do
+There are still many things to do.
 
  1. better documentation (especially javadoc)
  2. more implementations of configurations
 
-I actually have very small resources left to maintain the project, but i'm very omtimistic to work on it from time to time.
-There is also a productive enviroment which uses this library, so critical issues will be fixed very fast.
+I actually have very small resources to maintain the project, but i'm very omtimistic to work on it from time to time.
+There is also s productive enviroment which uses this library, so critical issues will be fixed very fast.
 
 About Me
 --------
@@ -147,9 +147,4 @@ About Me
 Email me: lukasplechinger at gmail.com
 
 Follow me at Twitter: [@plechinger](https://www.twitter.com/plechinger)
-
-
-
-
-
 
