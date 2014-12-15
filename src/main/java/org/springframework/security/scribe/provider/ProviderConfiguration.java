@@ -56,7 +56,7 @@ public interface ProviderConfiguration extends Serializable {
 
     String getApiSecret();
 
-    String getFilterIdentifer();
+    String getFilterIdentifier();
 
     public List<String> getAuthorities();
 }

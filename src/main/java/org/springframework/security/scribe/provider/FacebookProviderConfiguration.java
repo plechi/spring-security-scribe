@@ -56,7 +56,7 @@ public class FacebookProviderConfiguration extends AbstractProviderConfiguration
         return USER_ID_TOKEN;
     }
 
-    public String getFilterIdentifer() {
+    public String getFilterIdentifier() {
         return FILTER_IDENTIFER;
     }
 

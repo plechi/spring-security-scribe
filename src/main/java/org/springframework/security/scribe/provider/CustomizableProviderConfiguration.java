@@ -36,7 +36,7 @@ public class CustomizableProviderConfiguration extends AbstractProviderConfigura
     private Class apiClass;
     private String userDetailsUrl;
     private String userIdToken;
-    private String filterIdentifer;
+    private String filterIdentifier;
     private List<String> authorities;
 
     public String getAuthCode(HttpServletRequest request) {
@@ -76,12 +76,12 @@ public class CustomizableProviderConfiguration extends AbstractProviderConfigura
         this.userIdToken = userIdToken;
     }
 
-    public String getFilterIdentifer() {
-        return filterIdentifer;
+    public String getFilterIdentifier() {
+        return filterIdentifier;
     }
 
-    public void setFilterIdentifer(String filterIdentifer) {
-        this.filterIdentifer = filterIdentifer;
+    public void setFilterIdentifier(String filterIdentifier) {
+        this.filterIdentifier = filterIdentifier;
     }
 
     public List<String> getAuthorities() {

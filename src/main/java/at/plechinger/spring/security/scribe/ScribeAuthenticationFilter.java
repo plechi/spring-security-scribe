@@ -125,7 +125,7 @@ public class ScribeAuthenticationFilter extends AbstractAuthenticationProcessing
     private ProviderConfiguration getMatchedProviderConfiguration(String match) {
         if (match != null) {
             for (ProviderConfiguration providerConfiguration : providerConfigurations) {
-                if (match.equals(providerConfiguration.getFilterIdentifer())) {
+                if (match.equals(providerConfiguration.getFilterIdentifier())) {
                     return providerConfiguration;
                 }
             }
