@@ -27,8 +27,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
-import org.apache.log4j.Level;
-import org.apache.log4j.Logger;
 import org.json.JSONException;
 import org.scribe.builder.ServiceBuilder;
 import org.scribe.model.Token;
@@ -40,6 +38,8 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import at.plechinger.spring.security.scribe.provider.ProviderConfiguration;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -47,7 +47,7 @@ import at.plechinger.spring.security.scribe.provider.ProviderConfiguration;
  */
 public class ScribeAuthenticationProvider implements AuthenticationProvider {
 
-    private static final Logger LOG = Logger.getLogger(ScribeAuthenticationProvider.class);
+    private static final Logger LOG = Logger.getLogger(ScribeAuthenticationProvider.class.getName());
     private UserDetailsService userDetailsService;
     private Collection<GrantedAuthority> grantedAuthorities = new ArrayList<GrantedAuthority>(1);
 
@@ -60,7 +60,6 @@ public class ScribeAuthenticationProvider implements AuthenticationProvider {
         try {
             ScribeAuthentication scribeAuthentication = (ScribeAuthentication) authentication;
 
-
             providerConfiguration = scribeAuthentication.getProviderConfiguration();
             Token token = scribeAuthentication.getScribeToken();
 
@@ -71,20 +70,20 @@ public class ScribeAuthenticationProvider implements AuthenticationProvider {
                     .apiKey(providerConfiguration.getApiKey())
                     .apiSecret(providerConfiguration.getApiSecret())
                     .callback(scribeAuthentication.getRedirectUrl());
-            if (LOG.getLevel() == Level.DEBUG) {
-                LOG.debug("enable scribe debug mode");
+            if (LOG.getLevel() == Level.FINE) {
+                LOG.log(Level.FINE, "enable scribe debug mode");
                 serviceBuilder.debug();
             }
             OAuthService oAuthService = serviceBuilder.build();
             Map<String, Object> details = providerConfiguration.getUserDetails(oAuthService, token);
-            LOG.debug("details: " + details);
+            LOG.log(Level.FINE, "details: " + details);
             scribeAuthentication.setScribeDetails(details);
             String username = providerConfiguration.getUserId(details).toString();
             if (providerConfiguration.getUsernamePrefix() != null) {
-                LOG.debug("use username prefix " + providerConfiguration.getUsernamePrefix());
+                LOG.log(Level.FINE, "use username prefix " + providerConfiguration.getUsernamePrefix());
                 username = providerConfiguration.getUsernamePrefix() + username;
             }
-            LOG.debug("username is: " + username);
+            LOG.log(Level.FINE, "username is: " + username);
             scribeAuthentication.setUserDetails(userDetailsService.loadUserByUsername(username));
             scribeAuthentication.setAuthenticated(true);
             return scribeAuthentication;
@@ -117,7 +116,7 @@ public class ScribeAuthenticationProvider implements AuthenticationProvider {
         if (authorities != null && !authorities.isEmpty()) {
             grantedAuthorities = new ArrayList<GrantedAuthority>(authorities.size());
             for (String authority : authorities) {
-                LOG.debug("add authority " + authority);
+                LOG.log(Level.FINE, "add authority " + authority);
                 grantedAuthorities.add(new SimpleGrantedAuthority(authority));
             }
         }

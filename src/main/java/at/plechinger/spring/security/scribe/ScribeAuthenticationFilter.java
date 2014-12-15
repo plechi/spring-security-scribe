@@ -29,8 +29,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import org.apache.log4j.Level;
-import org.apache.log4j.Logger;
 import org.scribe.builder.ServiceBuilder;
 import org.scribe.model.Token;
 import org.scribe.model.Verifier;
@@ -39,6 +37,8 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import at.plechinger.spring.security.scribe.provider.ProviderConfiguration;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter;
 
 /**
@@ -47,13 +47,12 @@ import org.springframework.security.web.authentication.AbstractAuthenticationPro
  */
 public class ScribeAuthenticationFilter extends AbstractAuthenticationProcessingFilter {
 
-    private static final Logger LOG = Logger.getLogger(ScribeAuthenticationFilter.class);
+    private static final Logger LOG = Logger.getLogger(ScribeAuthenticationFilter.class.getName());
     //default values
     public static final String DEFAULT_FILTER_PROCESS_URL = "/j_spring_security_scribe/**";
     private static final String SESSION_TOKEN = "spring.security.scribe.token";
     /**
-     * List of
-     * <code>SocialAuthenticationProvider</code>s
+     * List of <code>SocialAuthenticationProvider</code>s
      */
     private List<ProviderConfiguration> providerConfigurations;
     private String configMatchParameter = "method";
@@ -65,11 +64,12 @@ public class ScribeAuthenticationFilter extends AbstractAuthenticationProcessing
     @Override
     public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException, IOException, ServletException {
         String callbackUrl = request.getRequestURL().append("?").append(request.getQueryString()).toString();
-        LOG.debug("callbackUrl " + callbackUrl);
+
+        LOG.log(Level.FINE, "callbackUrl " + callbackUrl);
 
         String configMatch = request.getParameter(configMatchParameter);
 
-        LOG.debug("configMatch: " + configMatch);
+        LOG.log(Level.FINE, "configMatch: " + configMatch);
 
         ProviderConfiguration providerConfiguration = getMatchedProviderConfiguration(configMatch);
 
@@ -82,8 +82,8 @@ public class ScribeAuthenticationFilter extends AbstractAuthenticationProcessing
                 .callback(callbackUrl);
 
         //enable debug logging if enabled
-        if (LOG.getLevel() == Level.DEBUG) {
-            LOG.debug("enable scribe debug mode");
+        if (LOG.getLevel() == Level.FINE) {
+             LOG.log(Level.FINE,"enable scribe debug mode");
             serviceBuilder.debug();
         }
 
