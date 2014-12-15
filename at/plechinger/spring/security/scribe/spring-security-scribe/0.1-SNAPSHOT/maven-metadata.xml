@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metadata modelVersion="1.1.0">
+  <groupId>at.plechinger.spring.security.scribe</groupId>
+  <artifactId>spring-security-scribe</artifactId>
+  <version>0.1-SNAPSHOT</version>
+  <versioning>
+    <snapshot>
+      <timestamp>20141215.195912</timestamp>
+      <buildNumber>1</buildNumber>
+    </snapshot>
+    <lastUpdated>20141215195912</lastUpdated>
+    <snapshotVersions>
+      <snapshotVersion>
+        <extension>jar</extension>
+        <value>0.1-20141215.195912-1</value>
+        <updated>20141215195912</updated>
+      </snapshotVersion>
+      <snapshotVersion>
+        <extension>pom</extension>
+        <value>0.1-20141215.195912-1</value>
+        <updated>20141215195912</updated>
+      </snapshotVersion>
+    </snapshotVersions>
+  </versioning>
+</metadata>
