@@ -163,3 +163,4 @@ pip-log.txt
 .DS_Store
 /sample/target/
 /target/
+/demo/demo-facebook/target/
