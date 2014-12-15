@@ -21,7 +21,7 @@
  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  THE SOFTWARE.
  */
-package org.springframework.security.scribe;
+package at.plechinger.spring.security.scribe;
 
 import java.util.Collection;
 import java.util.Map;
@@ -29,7 +29,7 @@ import org.scribe.model.Token;
 import org.springframework.security.authentication.AbstractAuthenticationToken;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.scribe.provider.ProviderConfiguration;
+import at.plechinger.spring.security.scribe.provider.ProviderConfiguration;
 
 /**
  * The implementation of

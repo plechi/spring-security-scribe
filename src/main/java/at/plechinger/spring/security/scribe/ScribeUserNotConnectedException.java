@@ -21,10 +21,10 @@
  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  THE SOFTWARE.
  */
-package org.springframework.security.scribe;
+package at.plechinger.spring.security.scribe;
 
 import org.springframework.security.core.AuthenticationException;
-import org.springframework.security.scribe.provider.ProviderConfiguration;
+import at.plechinger.spring.security.scribe.provider.ProviderConfiguration;
 
 /**
  *

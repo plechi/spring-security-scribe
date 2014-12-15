@@ -21,7 +21,7 @@
  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  THE SOFTWARE.
  */
-package org.springframework.security.scribe;
+package at.plechinger.spring.security.scribe;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -39,7 +39,7 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.scribe.provider.ProviderConfiguration;
+import at.plechinger.spring.security.scribe.provider.ProviderConfiguration;
 
 /**
  *

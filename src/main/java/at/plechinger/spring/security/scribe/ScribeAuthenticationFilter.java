@@ -21,7 +21,7 @@
  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  THE SOFTWARE.
  */
-package org.springframework.security.scribe;
+package at.plechinger.spring.security.scribe;
 
 import java.io.IOException;
 import java.util.List;
@@ -38,7 +38,7 @@ import org.scribe.oauth.OAuthService;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
-import org.springframework.security.scribe.provider.ProviderConfiguration;
+import at.plechinger.spring.security.scribe.provider.ProviderConfiguration;
 import org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter;
 
 /**

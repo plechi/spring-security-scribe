@@ -21,7 +21,7 @@
  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  THE SOFTWARE.
  */
-package org.springframework.security.scribe.provider;
+package at.plechinger.spring.security.scribe.provider;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -33,7 +33,7 @@ import org.scribe.model.Response;
 import org.scribe.model.Token;
 import org.scribe.model.Verb;
 import org.scribe.oauth.OAuthService;
-import org.springframework.security.scribe.ScribeUserNotConnectedException;
+import at.plechinger.spring.security.scribe.ScribeUserNotConnectedException;
 
 /**
  *
