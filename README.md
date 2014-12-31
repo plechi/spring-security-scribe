@@ -8,9 +8,22 @@ It uses [Scribe](https://github.com/fernandezpablo85/scribe-java) from [fernande
 Basic Usage (Example: "Login with Facebook")
 -----------
 
-Download sources and then run (use `bootstrap` only the first time):
+Download sources and then run:
 
 	$ mvn install
+
+Or import the repo:
+
+```xml
+<repository>
+    <id>Plechi Security Scribe Repo</id>
+    <url>https://raw.github.com/plechi/spring-security-scribe/mvn-repo/</url>
+    <snapshots>
+        <enabled>true</enabled>
+        <updatePolicy>always</updatePolicy>
+    </snapshots>
+</repository>
+```
 
 Then include the dependency in your `pom.xml`:
 
