@@ -4,7 +4,6 @@ OAuth Login for Spring Security
 This project provides support for creating a "Login with &lt;insert name of social network here&gt;" function in your Springframework-Application.
 It uses [Scribe](https://github.com/fernandezpablo85/scribe-java) from [fernandezpablo85](http://fernandezpablo85.github.com/) as OAuth client library.
 
-**The Annotation based sample project does not work. If you have any idea how to fix it, please tell me.**
 
 Basic Usage (Example: "Login with Facebook")
 -----------
@@ -23,7 +22,7 @@ Then include the dependency in your `pom.xml`:
 </dependency>
 ```
 
-You might also need the Dependency for Jackson. (If you use Spring-Boot it might be already in your project)
+You might also need the Dependency for Jackson. (If you use Spring-Boot it might be already in your classpath)
 
 ```xml
 <dependency>
