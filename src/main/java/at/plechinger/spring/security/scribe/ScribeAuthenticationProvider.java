@@ -1,25 +1,25 @@
 /*
- The MIT License
-
- Copyright (c) 2012 Lukas Plechinger
-
- Permission is hereby granted, free of charge, to any person obtaining a copy
- of this software and associated documentation files (the "Software"), to deal
- in the Software without restriction, including without limitation the rights
- to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- copies of the Software, and to permit persons to whom the Software is
- furnished to do so, subject to the following conditions:
-
- The above copyright notice and this permission notice shall be included in
- all copies or substantial portions of the Software.
-
- THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
- THE SOFTWARE.
+ * The MIT License
+ *
+ * Copyright 2014 Lukas Plechinger.
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ * THE SOFTWARE.
  */
 package at.plechinger.spring.security.scribe;
 
@@ -27,7 +27,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
-import org.json.JSONException;
 import org.scribe.builder.ServiceBuilder;
 import org.scribe.model.Token;
 import org.scribe.oauth.OAuthService;
@@ -38,6 +37,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import at.plechinger.spring.security.scribe.provider.ProviderConfiguration;
+import java.io.IOException;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
@@ -71,13 +71,12 @@ public class ScribeAuthenticationProvider implements AuthenticationProvider {
                     .apiKey(providerConfiguration.getApiKey())
                     .apiSecret(providerConfiguration.getApiSecret())
                     .callback(scribeAuthentication.getRedirectUrl());
-            
-            
+
             if (LOG.getLevel() == Level.DEBUG) {
                 LOG.log(Level.DEBUG, "enable scribe debug mode");
                 serviceBuilder.debug();
             }
-            
+
             OAuthService oAuthService = serviceBuilder.build();
             Map<String, Object> details = providerConfiguration.getUserDetails(oAuthService, token);
             LOG.log(Level.DEBUG, "details: " + details);
@@ -91,7 +90,7 @@ public class ScribeAuthenticationProvider implements AuthenticationProvider {
             scribeAuthentication.setUserDetails(userDetailsService.loadUserByUsername(username));
             scribeAuthentication.setAuthenticated(true);
             return scribeAuthentication;
-        } catch (JSONException ex) {
+        } catch (IOException ex) {
             throw new ScribeUserNotConnectedException(providerConfiguration, ex);
         }
     }

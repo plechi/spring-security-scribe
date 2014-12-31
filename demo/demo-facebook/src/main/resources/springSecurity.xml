@@ -1,0 +1,83 @@
+<!--
+ * The MIT License
+ *
+ * Copyright 2014 Lukas Plechinger.
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ * THE SOFTWARE.
+-->
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.1.xsd
+       http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.2.xsd
+">
+    
+    <http access-denied-page="/login-error" use-expressions="true" entry-point-ref="authenticaionEntryPoint" 
+                   xmlns="http://www.springframework.org/schema/security">
+        <intercept-url pattern="/protected" access="isAuthenticated()" />
+        <intercept-url pattern="/**" access="permitAll" />     
+        <logout logout-url="/logout" logout-success-url="/"/>             
+        <custom-filter before="FORM_LOGIN_FILTER" ref="scribeAuthenticationFilter"/>
+    </http>
+    
+    
+    <authentication-manager alias="authenticationManager" 
+                                     xmlns="http://www.springframework.org/schema/security">
+        <authentication-provider ref="scribeAuthenticationProvider"/>
+    </authentication-manager>
+
+    <bean id="authenticaionEntryPoint" 
+          class="org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint">
+        <property name="loginFormUrl" value="/" />
+    </bean>
+    
+    <bean id="scribeAuthenticationProvider" 
+          class="at.plechinger.spring.security.scribe.ScribeAuthenticationProvider"> 
+        <property name="userDetailsService" ref="userService"/>
+    </bean>
+    
+    <bean id="scribeAuthenticationFilter" 
+          class="at.plechinger.spring.security.scribe.ScribeAuthenticationFilter">
+        <property name="authenticationManager" ref="authenticationManager" />
+        <property name="authenticationSuccessHandler">
+            <bean class="org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler">
+                <property name="defaultTargetUrl" value="/protected" />
+                <property name="alwaysUseDefaultTargetUrl" value="true" />
+            </bean>
+        </property>
+        <property name="authenticationFailureHandler">
+            <bean class="org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler">
+                <property name="defaultFailureUrl" value="/login-error" />
+            </bean>
+        </property>
+        <property name="filterProcessesUrl" value="/login"/>
+        <property name="providerConfigurations">
+            <list>
+                <bean class="at.plechinger.spring.security.scribe.provider.FacebookProviderConfiguration">
+                    <property name="apiKey" value="373623236138734"/>
+                    <property name="apiSecret" value="d4609f3b7b5eea802de91b7269b1eccc" />
+                    <property name="">
+                </bean>
+            </list>
+        </property>
+    </bean>
+
+
+</beans>

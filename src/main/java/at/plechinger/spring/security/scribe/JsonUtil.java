@@ -23,38 +23,24 @@
  */
 package at.plechinger.spring.security.scribe;
 
-import org.springframework.security.core.AuthenticationException;
-import at.plechinger.spring.security.scribe.provider.ProviderConfiguration;
+import com.fasterxml.jackson.core.JsonFactory;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  *
- * @author Lukas Plechinger, www.plechinger.at
+ * @author lukas
  */
-public class ScribeUserNotConnectedException extends AuthenticationException {
+public class JsonUtil {
 
-    /**
-     * Creates a new instance of
-     * <code>NotAutorizedException</code> without detail message.
-     */
-    public ScribeUserNotConnectedException() {
-        super("Unknown Error");
-    }
-
-    /**
-     * Constructs an instance of
-     * <code>NotAutorizedException</code> with the specified detail message.
-     *
-     * @param msg the detail message.
-     */
-    public ScribeUserNotConnectedException(String msg) {
-        super(msg);
-    }
-
-    public ScribeUserNotConnectedException(ProviderConfiguration config) {
-        super("Scribe User not Connected. Api: " + config.getApiClass().getName());
-    }
-
-    public ScribeUserNotConnectedException(ProviderConfiguration config, Throwable cause) {
-        super("Scribe User not Connected. Api: " + config.getApiClass().getName(), cause);
+    public static Map<String, Object> parseMap(String input) throws IOException {
+        JsonFactory factory = new JsonFactory();
+        ObjectMapper mapper = new ObjectMapper(factory);
+        TypeReference<HashMap<String, Object>> typeRef = new TypeReference<HashMap<String, Object>>() {
+        };
+        return mapper.readValue(input, typeRef);
     }
 }

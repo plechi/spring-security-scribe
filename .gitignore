@@ -164,3 +164,4 @@ pip-log.txt
 /sample/target/
 /target/
 /demo/demo-facebook/target/
+/demo/demo-facebook/nb-configuration.xml
