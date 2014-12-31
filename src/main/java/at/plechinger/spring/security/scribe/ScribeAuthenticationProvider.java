@@ -38,8 +38,8 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import at.plechinger.spring.security.scribe.provider.ProviderConfiguration;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import org.apache.log4j.Level;
+import org.apache.log4j.Logger;
 
 /**
  *
@@ -56,6 +56,7 @@ public class ScribeAuthenticationProvider implements AuthenticationProvider {
     }
 
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
+        LOG.debug("authenticate");
         ProviderConfiguration providerConfiguration = null;
         try {
             ScribeAuthentication scribeAuthentication = (ScribeAuthentication) authentication;
@@ -70,20 +71,23 @@ public class ScribeAuthenticationProvider implements AuthenticationProvider {
                     .apiKey(providerConfiguration.getApiKey())
                     .apiSecret(providerConfiguration.getApiSecret())
                     .callback(scribeAuthentication.getRedirectUrl());
-            if (LOG.getLevel() == Level.FINE) {
-                LOG.log(Level.FINE, "enable scribe debug mode");
+            
+            
+            if (LOG.getLevel() == Level.DEBUG) {
+                LOG.log(Level.DEBUG, "enable scribe debug mode");
                 serviceBuilder.debug();
             }
+            
             OAuthService oAuthService = serviceBuilder.build();
             Map<String, Object> details = providerConfiguration.getUserDetails(oAuthService, token);
-            LOG.log(Level.FINE, "details: " + details);
+            LOG.log(Level.DEBUG, "details: " + details);
             scribeAuthentication.setScribeDetails(details);
             String username = providerConfiguration.getUserId(details).toString();
             if (providerConfiguration.getUsernamePrefix() != null) {
-                LOG.log(Level.FINE, "use username prefix " + providerConfiguration.getUsernamePrefix());
+                LOG.log(Level.DEBUG, "use username prefix " + providerConfiguration.getUsernamePrefix());
                 username = providerConfiguration.getUsernamePrefix() + username;
             }
-            LOG.log(Level.FINE, "username is: " + username);
+            LOG.log(Level.DEBUG, "username is: " + username);
             scribeAuthentication.setUserDetails(userDetailsService.loadUserByUsername(username));
             scribeAuthentication.setAuthenticated(true);
             return scribeAuthentication;
@@ -93,7 +97,7 @@ public class ScribeAuthenticationProvider implements AuthenticationProvider {
     }
 
     public boolean supports(Class<?> authentication) {
-        return ScribeAuthentication.class.isAssignableFrom(authentication);
+        return (ScribeAuthentication.class.isAssignableFrom(authentication));
     }
 
     public UserDetailsService getUserDetailsService() {
@@ -116,7 +120,7 @@ public class ScribeAuthenticationProvider implements AuthenticationProvider {
         if (authorities != null && !authorities.isEmpty()) {
             grantedAuthorities = new ArrayList<GrantedAuthority>(authorities.size());
             for (String authority : authorities) {
-                LOG.log(Level.FINE, "add authority " + authority);
+                LOG.log(Level.DEBUG, "add authority " + authority);
                 grantedAuthorities.add(new SimpleGrantedAuthority(authority));
             }
         }

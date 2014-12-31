@@ -37,8 +37,9 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import at.plechinger.spring.security.scribe.provider.ProviderConfiguration;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import org.apache.log4j.Level;
+import org.apache.log4j.Logger;
+
 import org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter;
 
 /**
@@ -60,16 +61,21 @@ public class ScribeAuthenticationFilter extends AbstractAuthenticationProcessing
     public ScribeAuthenticationFilter() {
         super(DEFAULT_FILTER_PROCESS_URL);
     }
+    
+    public ScribeAuthenticationFilter(String filterUrl) {
+        super(filterUrl);
+    }
 
     @Override
     public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException, IOException, ServletException {
+        
         String callbackUrl = request.getRequestURL().append("?").append(request.getQueryString()).toString();
 
-        LOG.log(Level.FINE, "callbackUrl " + callbackUrl);
+        LOG.log(Level.DEBUG, "callbackUrl " + callbackUrl);
 
         String configMatch = request.getParameter(configMatchParameter);
 
-        LOG.log(Level.FINE, "configMatch: " + configMatch);
+        LOG.log(Level.DEBUG, "configMatch: " + configMatch);
 
         ProviderConfiguration providerConfiguration = getMatchedProviderConfiguration(configMatch);
 
@@ -82,8 +88,8 @@ public class ScribeAuthenticationFilter extends AbstractAuthenticationProcessing
                 .callback(callbackUrl);
 
         //enable debug logging if enabled
-        if (LOG.getLevel() == Level.FINE) {
-             LOG.log(Level.FINE,"enable scribe debug mode");
+        if (LOG.getLevel() == Level.DEBUG) {
+             LOG.log(Level.DEBUG,"enable scribe debug mode");
             serviceBuilder.debug();
         }
 
