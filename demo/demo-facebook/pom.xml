@@ -43,7 +43,7 @@
     </dependencies>
     
     
-    <!--repositories>
+    <repositories>
         <repository>
             <id>Plechi Security Scribe Repo</id>
             <url>https://raw.github.com/plechi/spring-security-scribe/mvn-repo/</url>
@@ -52,5 +52,5 @@
                 <updatePolicy>always</updatePolicy>
             </snapshots>
         </repository>
-    </repositories-->
+    </repositories>
 </project>
