@@ -4,8 +4,8 @@
   <artifactId>spring-security-scribe</artifactId>
   <versioning>
     <versions>
-      <version>0.1-SNAPSHOT</version>
+      <version>0.2-SNAPSHOT</version>
     </versions>
-    <lastUpdated>20141215195912</lastUpdated>
+    <lastUpdated>20141231113638</lastUpdated>
   </versioning>
 </metadata>

@@ -2,23 +2,23 @@
 <metadata modelVersion="1.1.0">
   <groupId>at.plechinger.spring.security.scribe</groupId>
   <artifactId>spring-security-scribe</artifactId>
-  <version>0.1-SNAPSHOT</version>
+  <version>0.2-SNAPSHOT</version>
   <versioning>
     <snapshot>
-      <timestamp>20141215.195912</timestamp>
+      <timestamp>20141231.113638</timestamp>
       <buildNumber>1</buildNumber>
     </snapshot>
-    <lastUpdated>20141215195912</lastUpdated>
+    <lastUpdated>20141231113638</lastUpdated>
     <snapshotVersions>
       <snapshotVersion>
         <extension>jar</extension>
-        <value>0.1-20141215.195912-1</value>
-        <updated>20141215195912</updated>
+        <value>0.2-20141231.113638-1</value>
+        <updated>20141231113638</updated>
       </snapshotVersion>
       <snapshotVersion>
         <extension>pom</extension>
-        <value>0.1-20141215.195912-1</value>
-        <updated>20141215195912</updated>
+        <value>0.2-20141231.113638-1</value>
+        <updated>20141231113638</updated>
       </snapshotVersion>
     </snapshotVersions>
   </versioning>
